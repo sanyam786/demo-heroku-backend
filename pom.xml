@@ -16,7 +16,7 @@
 	<description>Demo project for Spring Boot Apis CRUD using Spring Data JPA</description>
 
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 
 	<dependencies>
@@ -49,13 +49,13 @@
 		</dependency>
 	</dependencies>
 
-	<!--<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build>-->
+	</build>
 
 </project>

@@ -16,9 +16,9 @@ public class Tutorial {
 	@Column(name = "description")
 	private String description;
 
-	//@Column(name = "address")
-	@Column(columnDefinition="String default 'office address'")
-	private String address;
+	@Column(name = "officeAddress")
+	//@Column(columnDefinition="String default 'office address'")
+	private String officeAddress;
 
 	@Column(name = "published")
 	private boolean published;
@@ -27,10 +27,10 @@ public class Tutorial {
 
 	}
 
-	public Tutorial(String title, String description, String address, boolean published) {
+	public Tutorial(String title, String description, String officeAddress, boolean published) {
 		this.title = title;
 		this.description = description;
-		this.address = address;
+		this.officeAddress = officeAddress;
 		this.published = published;
 	}
 
@@ -62,12 +62,12 @@ public class Tutorial {
 		this.published = isPublished;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getOfficeAddress() {
+		return officeAddress;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setOfficeAddress(String officeAddress) {
+		this.officeAddress = officeAddress;
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class Tutorial {
 				"id=" + id +
 				", title='" + title + '\'' +
 				", description='" + description + '\'' +
-				", address='" + address + '\'' +
+				", address='" + officeAddress + '\'' +
 				", published=" + published +
 				'}';
 	}

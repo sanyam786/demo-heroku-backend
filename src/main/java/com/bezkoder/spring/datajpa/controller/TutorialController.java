@@ -64,10 +64,8 @@ public class TutorialController {
 	@PostMapping("/tutorials")
 	public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
 		try {
-			System.out.println("============ tutorial address: "+tutorial.getDescription());
-			System.out.println("============ tutorial office address: "+tutorial.getAddress());
 			Tutorial _tutorial = tutorialRepository
-					.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), tutorial.getAddress(),false));
+					.save(new Tutorial(tutorial.getTitle(), tutorial.getDescription(), tutorial.getOfficeAddress(),false));
 			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -82,7 +80,7 @@ public class TutorialController {
 			Tutorial _tutorial = tutorialData.get();
 			_tutorial.setTitle(tutorial.getTitle());
 			_tutorial.setDescription(tutorial.getDescription());
-			_tutorial.setAddress(tutorial.getAddress());
+			_tutorial.setOfficeAddress(tutorial.getOfficeAddress());
 			_tutorial.setPublished(tutorial.isPublished());
 			return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
 		} else {

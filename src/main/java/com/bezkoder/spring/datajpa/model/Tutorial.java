@@ -16,7 +16,8 @@ public class Tutorial {
 	@Column(name = "description")
 	private String description;
 
-	@Column(name = "address")
+	//@Column(name = "address")
+	@Column(columnDefinition="String default 'office address'")
 	private String address;
 
 	@Column(name = "published")

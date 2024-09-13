@@ -40,7 +40,7 @@ public class Member {
     String createdByUser;
     String lastUpdatedByUser;
     @Lob
-    @Column(name = "photo")
+    @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
 
     @ManyToOne

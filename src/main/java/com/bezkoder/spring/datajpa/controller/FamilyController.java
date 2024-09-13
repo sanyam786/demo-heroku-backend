@@ -28,6 +28,30 @@ public class FamilyController {
     FamilyRepository familyRepository;
 
     @PostMapping("/{familyId}/add-member")
+    public ResponseEntity<Member> addMemberToFamily(@PathVariable("familyId") Long familyId, @RequestBody Member memberDetails) {
+        Date dateNow = new Date();
+        memberDetails.setCreateDateTime(dateNow);
+        //memberDetails.setPhoto(memberDetails.getPhoto());
+        Member member = familyService.addMemberToFamily(familyId, memberDetails);
+        return ResponseEntity.ok(member);
+    }
+
+    @PutMapping("/updateMember/{id}")
+    public ResponseEntity<Member> updateMemberDetails(@PathVariable("id") long id, @RequestBody Member member, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+        Date dateNow = new Date();
+        member.setLastUpdatedDateTime(dateNow);
+        if(file != null && !file.isEmpty()) {
+            member.setPhoto(file.getBytes());
+        }
+        Member _member = familyService.updateMemberDetails(id, member);
+        if (_member != null) {
+            return new ResponseEntity<>(_member, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /*@PostMapping("/{familyId}/add-member")
     public ResponseEntity<Member> addMemberToFamily(@PathVariable("familyId") Long familyId, @RequestPart("familyMember") Member memberDetails, @RequestPart("file") MultipartFile file) throws IOException {
         Date dateNow = new Date();
         memberDetails.setCreateDateTime(dateNow);
@@ -49,7 +73,7 @@ public class FamilyController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
+    }*/
 
     @PutMapping("/updateFamilyHead/{id}")
     public ResponseEntity<Member> updateFamilyHead(@PathVariable("id") long id) {

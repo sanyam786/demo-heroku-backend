@@ -1,4 +1,6 @@
 package com.bezkoder.spring.datajpa.service;
+import com.bezkoder.spring.datajpa.dto.FamilyDto;
+import com.bezkoder.spring.datajpa.dto.MemberDefaultDto;
 import com.bezkoder.spring.datajpa.model.Family;
 import com.bezkoder.spring.datajpa.model.Member;
 import com.bezkoder.spring.datajpa.model.Tutorial;
@@ -11,9 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.swing.plaf.metal.MetalMenuBarUI;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FamilyService {
@@ -117,6 +122,29 @@ public class FamilyService {
             List<Family> families = new ArrayList<Family>();
             familyRepository.findAll().forEach(families::add);
             return families;
+    }
+
+    public List<MemberDefaultDto> getAllFamiliesForDefaultSearch() {
+        List<Object[]> members = memberRepository.getAllFamiliesForDefaultSearch();
+
+        // Map Object[] to MemberDefaultDto
+        return members.stream().map(member -> {
+            Long memberId = (Long) member[0];
+            Boolean familyHead = (Boolean) member[1];
+            String firstName = (String) member[2];
+            String lastName = (String) member[3];
+            Timestamp timestamp = (Timestamp) member[4];
+            Date dateOfBirth = (Date) timestamp;
+            String bloodGroup = (String) member[5];
+            String mobile = (String) member[6];
+            String whatsappMobile = (String) member[7];
+            String area = (String) member[8];
+            String status = (String) member[9];
+
+            return new MemberDefaultDto(memberId, familyHead, firstName, lastName, dateOfBirth, bloodGroup, mobile,
+                whatsappMobile, area, status);
+        }).collect(Collectors.toList());
+        //return members;
     }
 
     public Family getFamiyById(long id) {

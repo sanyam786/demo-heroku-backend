@@ -1,5 +1,6 @@
 package com.bezkoder.spring.datajpa.controller;
 
+import com.bezkoder.spring.datajpa.dto.MemberDefaultDto;
 import com.bezkoder.spring.datajpa.model.Family;
 import com.bezkoder.spring.datajpa.model.Member;
 import com.bezkoder.spring.datajpa.repository.FamilyRepository;
@@ -106,11 +107,24 @@ public class FamilyController {
             for(int i=0; i < families.size(); i++){
                 members.addAll(families.get(i).getMembers());
             }
-            /*List<MemberDto> memberDtos = members.stream()
-                    .map(MemberDto::new)
-                    .collect(Collectors.toList());*/
-            //return ResponseEntity.ok(memberDtos);
             return new ResponseEntity<>(members, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/defaultfamilies")
+    public ResponseEntity<List<MemberDefaultDto>> getAllFamiliesForDefaultSearch() {
+        try {
+            List<MemberDefaultDto> memberDefaultDtos = familyService.getAllFamiliesForDefaultSearch();
+            //List<Member> members = new ArrayList<Member>();
+            if (memberDefaultDtos.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+//            for(int i=0; i < memberDefaultDtos.size(); i++){
+//                members.addAll(families.get(i).getMembers());
+//            }
+            return new ResponseEntity<>(memberDefaultDtos, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

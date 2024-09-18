@@ -18,6 +18,7 @@ public class MemberDefaultDto {
     String whatsappMobile;
     String area;
     String status;
+    String role;
 
     public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName, Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile, String area, String status) {
         this.memberId = memberId;
@@ -112,7 +113,15 @@ public class MemberDefaultDto {
         this.status = status;
     }
 
-//    public Family getFamily() {
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    //    public Family getFamily() {
 //        return family;
 //    }
 //

@@ -39,6 +39,7 @@ public class Member {
     Date lastUpdatedDateTime;
     String createdByUser;
     String lastUpdatedByUser;
+    String role;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -304,5 +305,13 @@ public class Member {
 
     public void setCheckedSameWhatsappNumber(Boolean checkedSameWhatsappNumber) {
         this.checkedSameWhatsappNumber = checkedSameWhatsappNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

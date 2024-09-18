@@ -11,4 +11,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
             "FROM member m " +
             "JOIN family f ON f.family_id = m.family_id ", nativeQuery = true)
     List<Object[]> getAllFamiliesForDefaultSearch();
+
+    List<Member> findByLastName(String lastName);
 }

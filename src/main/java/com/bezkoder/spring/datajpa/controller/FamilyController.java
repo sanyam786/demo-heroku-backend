@@ -38,13 +38,13 @@ public class FamilyController {
     }
 
     @PutMapping("/updateMember/{id}")
-    public ResponseEntity<Member> updateMemberDetails(@PathVariable("id") long id, @RequestBody Member member, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
+    public ResponseEntity<Member> updateMemberDetails(@PathVariable("id") long familyId, @RequestBody Member member, @RequestPart(value = "file", required = false) MultipartFile file) throws IOException {
         Date dateNow = new Date();
         member.setLastUpdatedDateTime(dateNow);
         if(file != null && !file.isEmpty()) {
             member.setPhoto(file.getBytes());
         }
-        Member _member = familyService.updateMemberDetails(id, member);
+        Member _member = familyService.updateMemberDetails(familyId, member);
         if (_member != null) {
             return new ResponseEntity<>(_member, HttpStatus.OK);
         } else {

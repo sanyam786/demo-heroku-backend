@@ -69,8 +69,8 @@ public class FamilyService {
         return memberDetails;
     }
 
-    public Member updateMemberDetails(Long id, Member member) {
-        Optional<Member> memberData = memberRepository.findById(id);
+    public Member updateMemberDetails(Long familyId, Member member) {
+        Optional<Member> memberData = memberRepository.findById(member.getMemberId());
         Member _member = null;
         if (memberData.isPresent()) {
             _member = memberData.get();

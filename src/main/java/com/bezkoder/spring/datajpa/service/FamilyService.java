@@ -107,6 +107,17 @@ public class FamilyService {
         return _member;
     }
 
+    public Member updateRole(Long id, String role) {
+        Optional<Member> memberData = memberRepository.findById(id);
+        Member _member = null;
+        if (memberData.isPresent()) {
+            _member = memberData.get();
+            _member.setRole(role);
+            memberRepository.save(_member);
+        }
+        return _member;
+    }
+
     public Member approveMember(Long id) {
         Optional<Member> memberData = memberRepository.findById(id);
         Member _member = null;

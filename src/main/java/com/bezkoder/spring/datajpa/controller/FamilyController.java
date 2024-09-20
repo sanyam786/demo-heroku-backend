@@ -86,6 +86,16 @@ public class FamilyController {
         }
     }
 
+    @PutMapping("/updateRole/{id}/{role}")
+    public ResponseEntity<Member> updateRole(@PathVariable("id") long id, @PathVariable("role") String role) {
+        Member _member = familyService.updateRole(id, role);
+        if (_member != null) {
+            return new ResponseEntity<>(_member, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/approveStatus/{id}")
     public ResponseEntity<Member> approveStatus(@PathVariable("id") long id) {
         Member _member = familyService.approveMember(id);

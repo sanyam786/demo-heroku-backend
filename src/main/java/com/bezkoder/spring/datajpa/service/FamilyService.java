@@ -1,5 +1,6 @@
 package com.bezkoder.spring.datajpa.service;
 import com.bezkoder.spring.datajpa.dto.FamilyDto;
+import com.bezkoder.spring.datajpa.dto.MemberAllSearchDto;
 import com.bezkoder.spring.datajpa.dto.MemberDefaultDto;
 import com.bezkoder.spring.datajpa.model.Family;
 import com.bezkoder.spring.datajpa.model.Member;
@@ -193,5 +194,33 @@ public class FamilyService {
             member = memberData.get();
         }
         return member;
+    }
+
+    public List<MemberAllSearchDto> searchMembers(String firstName,
+                                                  String lastName,
+                                                  String fatherName,
+                                                  String gender,
+                                                  Date dateOfBirth,
+                                                  String maritalStatus,
+                                                  String bloodGroup,
+                                                  String education,
+                                                  String permanentAddress,
+                                                  String mobile,
+                                                  String altMobile,
+                                                  String whatsappMobile,
+                                                  String email,
+                                                  String area,
+                                                  String currentAddress,
+                                                  String profession,
+                                                  String professionAddress,
+                                                  String professionEmail,
+                                                  String professionNumber,
+                                                  String status,
+                                                  Boolean familyHead) {
+
+        return memberRepository.searchMembers(firstName, lastName, fatherName, gender, dateOfBirth,
+                maritalStatus, bloodGroup, education, permanentAddress, mobile, altMobile,
+                whatsappMobile, email, area, currentAddress, profession, professionAddress,
+                professionEmail, professionNumber, status, familyHead);
     }
 }

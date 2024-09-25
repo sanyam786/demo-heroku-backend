@@ -1,5 +1,6 @@
 package com.bezkoder.spring.datajpa.controller;
 
+import com.bezkoder.spring.datajpa.dto.MemberAllSearchDto;
 import com.bezkoder.spring.datajpa.dto.MemberDefaultDto;
 import com.bezkoder.spring.datajpa.model.Family;
 import com.bezkoder.spring.datajpa.model.Member;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 //@CrossOrigin(origins = "http://localhost:8081")
 @CrossOrigin(origins = "https://demo-heroku-ui-a3206905a154.herokuapp.com")
@@ -178,5 +180,60 @@ public class FamilyController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/searchAllFilter")
+    public List<MemberAllSearchDto> searchMembers(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName,
+            @RequestParam(required = false) String fatherName,
+            @RequestParam(required = false) String gender,
+            @RequestParam(required = false) Date dateOfBirth,
+            @RequestParam(required = false) String maritalStatus,
+            @RequestParam(required = false) String bloodGroup,
+            @RequestParam(required = false) String education,
+            @RequestParam(required = false) String permanentAddress,
+            @RequestParam(required = false) String mobile,
+            @RequestParam(required = false) String altMobile,
+            @RequestParam(required = false) String whatsappMobile,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String area,
+            @RequestParam(required = false) String currentAddress,
+            @RequestParam(required = false) String profession,
+            @RequestParam(required = false) String professionAddress,
+            @RequestParam(required = false) String professionEmail,
+            @RequestParam(required = false) String professionNumber,
+            @RequestParam(required = false) String status,
+            @RequestParam(required = false) Boolean familyHead) {
+
+        // Get all members (or this could be a paginated list for performance)
+        List<MemberAllSearchDto> allMembers = familyService.searchMembers(firstName, lastName, fatherName, gender,dateOfBirth, maritalStatus, bloodGroup,
+                education, permanentAddress, mobile, altMobile, whatsappMobile, email, area, currentAddress, profession, professionAddress,
+                professionEmail, professionNumber, status, familyHead);
+        return allMembers;
+        // Filter the list based on non-null search parameters
+        /*return allMembers.stream()
+                .filter(member -> (firstName == null || member.getFirstName().toLowerCase().contains(firstName.toLowerCase())))
+                .filter(member -> (lastName == null || member.getLastName().toLowerCase().contains(lastName.toLowerCase())))
+                .filter(member -> (fatherName == null || member.getFatherName().toLowerCase().contains(fatherName.toLowerCase())))
+                .filter(member -> (gender == null || member.getGender().equalsIgnoreCase(gender)))
+                .filter(member -> (dateOfBirth == null || member.getDateOfBirth().equals(dateOfBirth)))
+                .filter(member -> (maritalStatus == null || member.getMaritalStatus().equalsIgnoreCase(maritalStatus)))
+                .filter(member -> (bloodGroup == null || member.getBloodGroup().equalsIgnoreCase(bloodGroup)))
+                .filter(member -> (education == null || member.getEducation().toLowerCase().contains(education.toLowerCase())))
+                .filter(member -> (permanentAddress == null || member.getPermanentAddress().toLowerCase().contains(permanentAddress.toLowerCase())))
+                .filter(member -> (mobile == null || member.getMobile().contains(mobile)))
+                .filter(member -> (altMobile == null || member.getAltMobile().contains(altMobile)))
+                .filter(member -> (whatsappMobile == null || member.getWhatsappMobile().contains(whatsappMobile)))
+                .filter(member -> (email == null || member.getEmail().toLowerCase().contains(email.toLowerCase())))
+                .filter(member -> (area == null || member.getArea().toLowerCase().contains(area.toLowerCase())))
+                .filter(member -> (currentAddress == null || member.getCurrentAddress().toLowerCase().contains(currentAddress.toLowerCase())))
+                .filter(member -> (profession == null || member.getProfession().toLowerCase().contains(profession.toLowerCase())))
+                .filter(member -> (professionAddress == null || member.getProfessionAddress().toLowerCase().contains(professionAddress.toLowerCase())))
+                .filter(member -> (professionEmail == null || member.getProfessionEmail().toLowerCase().contains(professionEmail.toLowerCase())))
+                .filter(member -> (professionNumber == null || member.getProfessionNumber().contains(professionNumber)))
+                .filter(member -> (status == null || member.getStatus().equalsIgnoreCase(status)))
+                .map(member -> new MemberDto(member))  // Convert to DTO
+                .collect(Collectors.toList());*/
     }
 }

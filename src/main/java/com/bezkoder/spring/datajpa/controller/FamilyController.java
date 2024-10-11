@@ -6,6 +6,7 @@ import com.bezkoder.spring.datajpa.model.Family;
 import com.bezkoder.spring.datajpa.model.Member;
 import com.bezkoder.spring.datajpa.repository.FamilyRepository;
 import com.bezkoder.spring.datajpa.service.FamilyService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -235,5 +236,11 @@ public class FamilyController {
                 .filter(member -> (status == null || member.getStatus().equalsIgnoreCase(status)))
                 .map(member -> new MemberDto(member))  // Convert to DTO
                 .collect(Collectors.toList());*/
+    }
+
+    // API to get AI analysis for a member
+    @GetMapping("/{memberId}/analyze")
+    public String analyzeMember(@PathVariable Long memberId) throws JSONException {
+        return familyService.getMemberAnalysis(memberId);
     }
 }

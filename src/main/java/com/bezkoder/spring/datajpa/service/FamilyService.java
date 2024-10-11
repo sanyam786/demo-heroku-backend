@@ -7,6 +7,7 @@ import com.bezkoder.spring.datajpa.model.Member;
 import com.bezkoder.spring.datajpa.model.Tutorial;
 import com.bezkoder.spring.datajpa.repository.FamilyRepository;
 import com.bezkoder.spring.datajpa.repository.MemberRepository;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ public class FamilyService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private HuggingFaceService huggingFaceService;
 
     // Create a new family if not exists, and add a new member
     public Family addMemberToFamilyByName(String familyName, Member memberDetails) {
@@ -222,5 +226,21 @@ public class FamilyService {
                 maritalStatus, bloodGroup, education, permanentAddress, mobile, altMobile,
                 whatsappMobile, email, area, currentAddress, profession, professionAddress,
                 professionEmail, professionNumber, status, familyHead);
+    }
+
+    // Get prediction for member data using Hugging Face model
+    public String getMemberAnalysis(Long memberId) throws JSONException {
+        Member member = null;
+        Optional<Member> memberData = memberRepository.findById(memberId);
+        if (memberData.isPresent()) {
+            member = memberData.get();
+            //String modelName = "gpt2";  // Replace with the model name you want to use
+            String modelName = "facebook/bart-large-cnn";
+            //String modelName = "t5-base";
+            // Call Hugging Face API to analyze member data
+            return huggingFaceService.callHuggingFaceModel(member, modelName);
+        }else {
+            return "Member not found";
+        }
     }
 }

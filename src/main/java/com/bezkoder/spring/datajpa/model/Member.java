@@ -40,6 +40,8 @@ public class Member {
     String createdByUser;
     String lastUpdatedByUser;
     String role;
+    String dhowanPani;
+    String ratriBhojanTyag;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -313,5 +315,21 @@ public class Member {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getDhowanPani() {
+        return dhowanPani;
+    }
+
+    public void setDhowanPani(String dhowanPani) {
+        this.dhowanPani = dhowanPani;
+    }
+
+    public String getRatriBhojanTyag() {
+        return ratriBhojanTyag;
+    }
+
+    public void setRatriBhojanTyag(String ratriBhojanTyag) {
+        this.ratriBhojanTyag = ratriBhojanTyag;
     }
 }

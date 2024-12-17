@@ -19,8 +19,12 @@ public class MemberDefaultDto {
     String area;
     String status;
     String role;
+    String dhowanPani;
+    String ratriBhojanTyag;
 
-    public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName, Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile, String area, String status) {
+    public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName,
+                            Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile,
+                            String area, String status, String role, String dhowanPani, String ratriBhojanTyag) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -31,6 +35,9 @@ public class MemberDefaultDto {
         this.whatsappMobile = whatsappMobile;
         this.area = area;
         this.status = status;
+        this.role = role;
+        this.dhowanPani = dhowanPani;
+        this.ratriBhojanTyag = ratriBhojanTyag;
     }
 
     public Long getMemberId() {
@@ -119,6 +126,22 @@ public class MemberDefaultDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getDhowanPani() {
+        return dhowanPani;
+    }
+
+    public void setDhowanPani(String dhowanPani) {
+        this.dhowanPani = dhowanPani;
+    }
+
+    public String getRatriBhojanTyag() {
+        return ratriBhojanTyag;
+    }
+
+    public void setRatriBhojanTyag(String ratriBhojanTyag) {
+        this.ratriBhojanTyag = ratriBhojanTyag;
     }
 
     //    public Family getFamily() {

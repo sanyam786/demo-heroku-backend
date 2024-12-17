@@ -156,9 +156,12 @@ public class FamilyService {
             String whatsappMobile = (String) member[7];
             String area = (String) member[8];
             String status = (String) member[9];
+            String role = (String) member[9];
+            String dhowanPani = member.length > 10 ? (String) member[10] : "";
+            String ratriBhojanTyag = member.length > 11 ? (String) member[11]: "";
 
             return new MemberDefaultDto(memberId, familyHead, firstName, lastName, dateOfBirth, bloodGroup, mobile,
-                whatsappMobile, area, status);
+                whatsappMobile, area, status, role, dhowanPani, ratriBhojanTyag);
         }).collect(Collectors.toList());
         //return members;
     }

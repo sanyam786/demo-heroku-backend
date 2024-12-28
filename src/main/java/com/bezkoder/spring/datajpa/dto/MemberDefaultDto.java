@@ -21,10 +21,15 @@ public class MemberDefaultDto {
     String role;
     String dhowanPani;
     String ratriBhojanTyag;
+    String fatherName;
+    @Lob
+    @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
+    private byte[] photo;
 
     public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName,
                             Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile,
-                            String area, String status, String role, String dhowanPani, String ratriBhojanTyag) {
+                            String area, String status, String role, String dhowanPani, String ratriBhojanTyag,
+                            String fatherName, byte[] photo) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -38,6 +43,8 @@ public class MemberDefaultDto {
         this.role = role;
         this.dhowanPani = dhowanPani;
         this.ratriBhojanTyag = ratriBhojanTyag;
+        this.fatherName = fatherName;
+        this.photo = photo;
     }
 
     public Long getMemberId() {
@@ -142,6 +149,22 @@ public class MemberDefaultDto {
 
     public void setRatriBhojanTyag(String ratriBhojanTyag) {
         this.ratriBhojanTyag = ratriBhojanTyag;
+    }
+
+    public String getFatherName() {
+        return fatherName;
+    }
+
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     //    public Family getFamily() {

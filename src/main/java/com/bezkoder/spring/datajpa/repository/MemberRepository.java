@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "SELECT m.member_id, m.family_head, m.first_name, m.last_name, m.date_of_birth, m.blood_group, m.mobile, m.whatsapp_mobile, m.area, m.status " +
+    @Query(value = "SELECT m.member_id, m.family_head, m.first_name, m.last_name, m.date_of_birth, m.blood_group, m.mobile, m.whatsapp_mobile, m.area, m.status, m.role, m.dhowan_pani, m.ratri_bhojan_tyag, m.father_name, m.photo " +
             "FROM member m " +
             "JOIN family f ON f.family_id = m.family_id ", nativeQuery = true)
     List<Object[]> getAllFamiliesForDefaultSearch();

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.swing.plaf.metal.MetalMenuBarUI;
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -184,24 +185,28 @@ public class FamilyService {
             String area = (String) member[8];
             String status = (String) member[9];
             String role = (String) member[10];
-            String dhowanPani = member.length > 11 ? (String) member[11] : "";
-            String ratriBhojanTyag = member.length > 12 ? (String) member[12]: "";
-            String fatherName = member.length > 13 ? (String) member[13]: "";
-            String professiondd = member.length > 14 ? (String) member[14]: "";
-            String navkarsi = member.length > 15 ? (String) member[15]: "";
-            String[] sthanak = member.length > 16 ? ((String) member[16]).split(",") : new String[0];
-            String[] interest =member.length > 17 ? ((String) member[17]).split(",") : new String[0];
-            String availability = member.length > 18 ? (String) member[18]: "";
-            String monthlyHours = member.length > 19 ? (String) member[19]: "";
-            String garamPani = member.length > 20 ? (String) member[20]: "";
-            byte[] photo = member.length > 20 && member[20] instanceof byte[]
-                    ? (byte[]) member[20]
+            String fatherName = member.length > 11 ? (String) member[11]: "";
+            String dhowanPani = member.length > 12 ? (String) member[12] : "";
+            String profession = member.length > 13 ? (String) member[13]: "";
+            String sthanakObject = member.length > 14 && member[14] instanceof byte[]
+                    ? new String((byte[]) member[14], StandardCharsets.UTF_8)
+                    : "";
+            String[] sthanak = sthanakObject.isEmpty() ? new String[0] : sthanakObject.split(",");
+
+            String interestObject = member.length > 15 && member[15] instanceof byte[]
+                    ? new String((byte[]) member[15], StandardCharsets.UTF_8)
+                    : "";
+            String[] interest = interestObject.isEmpty() ? new String[0] : interestObject.split(",");
+
+            String garamPani = member.length > 16 ? (String) member[16]: "";
+            byte[] photo = member.length > 17 && member[17] instanceof byte[]
+                    ? (byte[]) member[17]
                     : new byte[0];
 
 
             return new MemberDefaultDto(memberId, familyHead, firstName, lastName, dateOfBirth, bloodGroup, mobile,
-                whatsappMobile, area, status, role, dhowanPani, ratriBhojanTyag, fatherName, professiondd, navkarsi,
-                    sthanak, interest, availability, monthlyHours, garamPani, photo);
+                whatsappMobile, area, status, role, dhowanPani, fatherName, profession,
+                    sthanak, interest, garamPani, photo);
         }).collect(Collectors.toList());
         //return members;
     }

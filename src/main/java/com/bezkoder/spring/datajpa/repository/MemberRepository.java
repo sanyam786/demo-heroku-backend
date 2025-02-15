@@ -8,12 +8,14 @@ import java.util.Date;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-    @Query(value = "SELECT m.member_id, m.family_head, m.first_name, m.last_name, m.date_of_birth, m.blood_group, m.mobile, m.whatsapp_mobile, m.area, m.status, m.role, m.dhowan_pani, m.ratri_bhojan_tyag, m.father_name, m.photo " +
+    @Query(value = "SELECT m.member_id, m.family_head, m.first_name, m.last_name, m.date_of_birth, m.blood_group, m.mobile, m.whatsapp_mobile, m.area, m.status, m.role, m.father_name, m.dhowan_pani, m.profession, m.sthanak, m.interest, m.garam_pani, m.photo " +
             "FROM member m " +
             "JOIN family f ON f.family_id = m.family_id ", nativeQuery = true)
     List<Object[]> getAllFamiliesForDefaultSearch();
 
     List<Member> findByLastName(String lastName);
+
+    List<Member> findByMobile(String phoneNumber);
 
     @Query("SELECT new com.bezkoder.spring.datajpa.dto.MemberAllSearchDto(m.memberId, m.familyHead, m.firstName, m.lastName, m.fatherName, m.gender, m.dateOfBirth, m.maritalStatus, m.bloodGroup, m.education," +
             "m.permanentAddress, m.mobile, m.altMobile, m.whatsappMobile, m.email, m.area, m.currentAddress," +

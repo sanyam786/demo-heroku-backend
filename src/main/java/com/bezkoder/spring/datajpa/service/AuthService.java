@@ -23,11 +23,11 @@ public class AuthService {
 //            throw new IllegalArgumentException("Invalid username format.");
 //        }
 
-        String lastName = username;
+        String phoneNumber = username;
         //String dateOfBirth = usernameParts[1]; // Format should be checked
 
         // Fetch the member by lastName
-        List<Member> members = memberRepository.findByLastName(lastName);
+        List<Member> members = memberRepository.findByMobile(phoneNumber);
 
         if (members == null || members.isEmpty()) {
             throw new RuntimeException("User not found");
@@ -35,13 +35,13 @@ public class AuthService {
 
         for (Member member: members) {
             String outputDate = convertDate(member.getDateOfBirth().toString());
-            String expectedPassword = member.getLastName() + outputDate;
+            String expectedPassword = outputDate;
             if(password.equalsIgnoreCase(expectedPassword)){
                 return member;
             }
 
         }
-        // Combine lastName + dateOfBirth to verify password
+        // Combine phone number + dateOfBirth to verify password
 
             throw new RuntimeException("Invalid password");
 

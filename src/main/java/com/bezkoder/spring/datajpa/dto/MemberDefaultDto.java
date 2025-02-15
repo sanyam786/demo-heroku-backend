@@ -22,7 +22,7 @@ public class MemberDefaultDto {
     String dhowanPani;
     String ratriBhojanTyag;
     String fatherName;
-    String professiondd;
+    String profession;
     String navkarsi;
     String[] sthanak;
     String[] interest;
@@ -35,9 +35,9 @@ public class MemberDefaultDto {
 
     public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName,
                             Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile,
-                            String area, String status, String role, String dhowanPani, String ratriBhojanTyag,
-                            String fatherName, String professiondd, String navkarsi, String[] sthanak,
-                            String[] interest, String availability, String garamPani, String monthlyHours,byte[] photo) {
+                            String area, String status, String role, String dhowanPani,
+                            String fatherName, String profession, String[] sthanak,
+                            String[] interest, String garamPani, byte[] photo) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -50,14 +50,10 @@ public class MemberDefaultDto {
         this.status = status;
         this.role = role;
         this.dhowanPani = dhowanPani;
-        this.ratriBhojanTyag = ratriBhojanTyag;
         this.fatherName = fatherName;
-        this.professiondd = professiondd;
-        this.navkarsi = navkarsi;
+        this.profession = profession;
         this.sthanak = sthanak;
         this.interest = interest;
-        this.availability = availability;
-        this.monthlyHours = monthlyHours;
         this.garamPani = garamPani;
         this.photo = photo;
     }
@@ -182,12 +178,12 @@ public class MemberDefaultDto {
         this.photo = photo;
     }
 
-    public String getProfessiondd() {
-        return professiondd;
+    public String getProfession() {
+        return profession;
     }
 
-    public void setProfessiondd(String professiondd) {
-        this.professiondd = professiondd;
+    public void setProfessiondd(String profession) {
+        this.profession = profession;
     }
 
     public String getNavkarsi() {

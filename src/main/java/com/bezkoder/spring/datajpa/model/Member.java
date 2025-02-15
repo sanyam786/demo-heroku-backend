@@ -42,6 +42,14 @@ public class Member {
     String role;
     String dhowanPani;
     String ratriBhojanTyag;
+    String professiondd;
+    String navkarsi;
+    String[] sthanak;
+    String[] interest;
+    String availability;
+    String monthlyHours;
+    Boolean sameAddAsFamilyHeadAddCheck;
+    String garamPani;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -331,5 +339,69 @@ public class Member {
 
     public void setRatriBhojanTyag(String ratriBhojanTyag) {
         this.ratriBhojanTyag = ratriBhojanTyag;
+    }
+
+    public String getProfessiondd() {
+        return professiondd;
+    }
+
+    public void setProfessiondd(String professiondd) {
+        this.professiondd = professiondd;
+    }
+
+    public String getNavkarsi() {
+        return navkarsi;
+    }
+
+    public void setNavkarsi(String navkarsi) {
+        this.navkarsi = navkarsi;
+    }
+
+    public String[] getSthanak() {
+        return sthanak;
+    }
+
+    public void setSthanak(String[] sthanak) {
+        this.sthanak = sthanak;
+    }
+
+    public String[] getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String[] interest) {
+        this.interest = interest;
+    }
+
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getMonthlyHours() {
+        return monthlyHours;
+    }
+
+    public void setMonthlyHours(String monthlyHours) {
+        this.monthlyHours = monthlyHours;
+    }
+
+    public Boolean getSameAddAsFamilyHeadAddCheck() {
+        return sameAddAsFamilyHeadAddCheck;
+    }
+
+    public void setSameAddAsFamilyHeadAddCheck(Boolean sameAddAsFamilyHeadAddCheck) {
+        this.sameAddAsFamilyHeadAddCheck = sameAddAsFamilyHeadAddCheck;
+    }
+
+    public String getGaramPani() {
+        return garamPani;
+    }
+
+    public void setGaramPani(String garamPani) {
+        this.garamPani = garamPani;
     }
 }

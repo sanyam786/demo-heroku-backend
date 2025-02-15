@@ -66,6 +66,15 @@ public class FamilyService {
 
         if(family != null){
             //family.setFamilyName(familyName);
+            if(memberDetails.getSameAddAsFamilyHeadAddCheck()){
+                for (Member member: family.getMembers()){
+                    if(member.getFamilyHead()){
+                        memberDetails.setCurrentAddress(member.getCurrentAddress());
+                        memberDetails.setPermanentAddress(member.getPermanentAddress());
+                        break;
+                    }
+                }
+            }
             familyRepository.save(family);
 
             memberDetails.setFamily(family);
@@ -80,6 +89,24 @@ public class FamilyService {
         if (memberData.isPresent()) {
             _member = memberData.get();
             Family family = _member.getFamily();
+            if(_member.getFamilyHead()){
+                for (Member familyMemeber: family.getMembers()){
+                    if(!familyMemeber.getFamilyHead() &&
+                            familyMemeber.getSameAddAsFamilyHeadAddCheck() != null && familyMemeber.getSameAddAsFamilyHeadAddCheck()){
+                        familyMemeber.setCurrentAddress(member.getCurrentAddress());
+                        familyMemeber.setPermanentAddress(member.getPermanentAddress());
+                        memberRepository.save(familyMemeber);
+                    }
+                }
+            }else if(member.getSameAddAsFamilyHeadAddCheck() != null && member.getSameAddAsFamilyHeadAddCheck()){
+                for (Member familyHead: family.getMembers()){
+                    if(familyHead.getFamilyHead()){
+                        member.setCurrentAddress(familyHead.getCurrentAddress());
+                        member.setPermanentAddress(familyHead.getPermanentAddress());
+                        break;
+                    }
+                }
+            }
             _member = member;
             _member.setFamily(family);
             /*_member.setFirstName(member.getFirstName());
@@ -160,13 +187,21 @@ public class FamilyService {
             String dhowanPani = member.length > 11 ? (String) member[11] : "";
             String ratriBhojanTyag = member.length > 12 ? (String) member[12]: "";
             String fatherName = member.length > 13 ? (String) member[13]: "";
-            byte[] photo = member.length > 14 && member[14] instanceof byte[]
-                    ? (byte[]) member[14]
+            String professiondd = member.length > 14 ? (String) member[14]: "";
+            String navkarsi = member.length > 15 ? (String) member[15]: "";
+            String[] sthanak = member.length > 16 ? ((String) member[16]).split(",") : new String[0];
+            String[] interest =member.length > 17 ? ((String) member[17]).split(",") : new String[0];
+            String availability = member.length > 18 ? (String) member[18]: "";
+            String monthlyHours = member.length > 19 ? (String) member[19]: "";
+            String garamPani = member.length > 20 ? (String) member[20]: "";
+            byte[] photo = member.length > 20 && member[20] instanceof byte[]
+                    ? (byte[]) member[20]
                     : new byte[0];
 
 
             return new MemberDefaultDto(memberId, familyHead, firstName, lastName, dateOfBirth, bloodGroup, mobile,
-                whatsappMobile, area, status, role, dhowanPani, ratriBhojanTyag, fatherName, photo);
+                whatsappMobile, area, status, role, dhowanPani, ratriBhojanTyag, fatherName, professiondd, navkarsi,
+                    sthanak, interest, availability, monthlyHours, garamPani, photo);
         }).collect(Collectors.toList());
         //return members;
     }

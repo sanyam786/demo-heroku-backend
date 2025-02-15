@@ -22,6 +22,13 @@ public class MemberDefaultDto {
     String dhowanPani;
     String ratriBhojanTyag;
     String fatherName;
+    String professiondd;
+    String navkarsi;
+    String[] sthanak;
+    String[] interest;
+    String availability;
+    String monthlyHours;
+    String garamPani;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -29,7 +36,8 @@ public class MemberDefaultDto {
     public MemberDefaultDto(Long memberId, Boolean familyHead, String firstName, String lastName,
                             Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile,
                             String area, String status, String role, String dhowanPani, String ratriBhojanTyag,
-                            String fatherName, byte[] photo) {
+                            String fatherName, String professiondd, String navkarsi, String[] sthanak,
+                            String[] interest, String availability, String garamPani, String monthlyHours,byte[] photo) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -44,6 +52,13 @@ public class MemberDefaultDto {
         this.dhowanPani = dhowanPani;
         this.ratriBhojanTyag = ratriBhojanTyag;
         this.fatherName = fatherName;
+        this.professiondd = professiondd;
+        this.navkarsi = navkarsi;
+        this.sthanak = sthanak;
+        this.interest = interest;
+        this.availability = availability;
+        this.monthlyHours = monthlyHours;
+        this.garamPani = garamPani;
         this.photo = photo;
     }
 
@@ -165,6 +180,62 @@ public class MemberDefaultDto {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public String getProfessiondd() {
+        return professiondd;
+    }
+
+    public void setProfessiondd(String professiondd) {
+        this.professiondd = professiondd;
+    }
+
+    public String getNavkarsi() {
+        return navkarsi;
+    }
+
+    public void setNavkarsi(String navkarsi) {
+        this.navkarsi = navkarsi;
+    }
+
+    public String[] getSthanak() {
+        return sthanak;
+    }
+
+    public void setSthanak(String[] sthanak) {
+        this.sthanak = sthanak;
+    }
+
+    public String[] getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String[] interest) {
+        this.interest = interest;
+    }
+
+    public String getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getMonthlyHours() {
+        return monthlyHours;
+    }
+
+    public void setMonthlyHours(String monthlyHours) {
+        this.monthlyHours = monthlyHours;
+    }
+
+    public String getGaramPani() {
+        return garamPani;
+    }
+
+    public void setGaramPani(String garamPani) {
+        this.garamPani = garamPani;
     }
 
     //    public Family getFamily() {

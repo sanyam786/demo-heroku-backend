@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.swing.plaf.metal.MetalMenuBarUI;
@@ -82,6 +83,44 @@ public class FamilyService {
             memberRepository.save(memberDetails);
         }
         return memberDetails;
+    }
+
+    @Transactional
+    public String deleteMemberById(Long memberId) {
+        Member member = null;
+        if(memberId != null && memberId != 0){
+            Optional<Member> memberOpt = memberRepository.findById(memberId);
+            if (memberOpt.isPresent()) {
+                member = memberOpt.get();
+            }
+            if(member !=null)
+            {
+                if(!member.getFamilyHead()){
+                    memberRepository.deleteById(memberId);
+                    memberRepository.flush(); // Ensure immediate commit
+                    return "Member deleted successfully.";
+                } else {
+                    Family family = null;
+                    if(member.getFamily().getFamilyId() != null && member.getFamily().getFamilyId() != 0){
+                        Optional<Family> familyOpt = familyRepository.findByFamilyId(member.getFamily().getFamilyId());
+                        if (familyOpt.isPresent()) {
+                            family = familyOpt.get();
+                            if(family.getMembers().size() > 1){
+                                return "Member can't be deleted as it has other family members associated";
+                            } else {
+                                memberRepository.deleteById(memberId);
+                                familyRepository.deleteById(member.getFamily().getFamilyId());
+                                memberRepository.flush(); // Ensure immediate commit
+                                return "Member deleted successfully.";
+                            }
+                        }
+                    }
+                }
+            }else {
+                return "Member Not Found";
+            }
+        }
+        return "Member Not Found";
     }
 
     public Member updateMemberDetails(Long familyId, Member member) {

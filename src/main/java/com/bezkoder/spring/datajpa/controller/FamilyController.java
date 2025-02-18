@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 //@CrossOrigin(origins = "http://localhost:8081")
@@ -242,5 +240,13 @@ public class FamilyController {
     @GetMapping("/{memberId}/analyze")
     public String analyzeMember(@PathVariable Long memberId) throws JSONException {
         return familyService.getMemberAnalysis(memberId);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, String>> deleteMember(@PathVariable Long id) {
+        String deleteMessage = familyService.deleteMemberById(id);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", deleteMessage);
+        return ResponseEntity.ok(response); // Returns a JSON object
     }
 }

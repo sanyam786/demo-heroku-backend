@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 //@CrossOrigin(origins = "http://localhost:8081")
-@CrossOrigin(origins = "https://demo-heroku-ui-a3206905a154.herokuapp.com")
+@CrossOrigin(origins = {"https://demo-heroku-ui-a3206905a154.herokuapp.com", "https://www.sjsudaipur.com"})
 @RestController
 @RequestMapping("/api/family")
 public class FamilyController {

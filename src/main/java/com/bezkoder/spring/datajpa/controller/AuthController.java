@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.crypto.SecretKey;
 
 //@CrossOrigin(origins = "http://localhost:8081")
-@CrossOrigin(origins = "https://demo-heroku-ui-a3206905a154.herokuapp.com")
+@CrossOrigin(origins = {"https://demo-heroku-ui-a3206905a154.herokuapp.com", "https://www.sjsudaipur.com"})
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

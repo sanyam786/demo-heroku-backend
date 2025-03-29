@@ -50,6 +50,10 @@ public class Member {
     String monthlyHours;
     Boolean sameAddAsFamilyHeadAddCheck;
     String garamPani;
+    @Column
+    private Double latitude;
+    @Column
+    private Double longitude;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -403,5 +407,21 @@ public class Member {
 
     public void setGaramPani(String garamPani) {
         this.garamPani = garamPani;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 }

@@ -203,12 +203,13 @@ public class FamilyController {
             @RequestParam(required = false) String professionEmail,
             @RequestParam(required = false) String professionNumber,
             @RequestParam(required = false) String status,
+            @RequestParam(required = false) String subArea,
             @RequestParam(required = false) Boolean familyHead) {
 
         // Get all members (or this could be a paginated list for performance)
         List<MemberAllSearchDto> allMembers = familyService.searchMembers(firstName, lastName, fatherName, gender,dateOfBirth, maritalStatus, bloodGroup,
                 education, permanentAddress, mobile, altMobile, whatsappMobile, email, area, currentAddress, profession, professionAddress,
-                professionEmail, professionNumber, status, familyHead);
+                professionEmail, professionNumber, status, subArea, familyHead);
         return allMembers;
         // Filter the list based on non-null search parameters
         /*return allMembers.stream()
@@ -248,5 +249,11 @@ public class FamilyController {
         Map<String, String> response = new HashMap<>();
         response.put("message", deleteMessage);
         return ResponseEntity.ok(response); // Returns a JSON object
+    }
+
+    @GetMapping("/members/generate-ids")
+    public ResponseEntity<String> generateIds() {
+        familyService.assignUniqueIdsToExistingMembers();
+        return ResponseEntity.ok("Unique IDs generated successfully.");
     }
 }

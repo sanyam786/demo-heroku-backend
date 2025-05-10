@@ -25,6 +25,7 @@ public class Member {
     String whatsappMobile;
     String email;
     String area;
+    String subArea;
     Boolean checkedSameAddress;
     Boolean checkedSameWhatsappNumber;
     String currentAddress;
@@ -54,6 +55,8 @@ public class Member {
     private Double latitude;
     @Column
     private Double longitude;
+    @Column(unique = true)
+    private String uniqueMemberId;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -423,5 +426,21 @@ public class Member {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUniqueMemberId() {
+        return uniqueMemberId;
+    }
+
+    public void setUniqueMemberId(String uniqueMemberId) {
+        this.uniqueMemberId = uniqueMemberId;
+    }
+
+    public String getSubArea() {
+        return subArea;
+    }
+
+    public void setSubArea(String subArea) {
+        this.subArea = subArea;
     }
 }

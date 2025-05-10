@@ -32,8 +32,9 @@ public class MemberAllSearchDto {
     String createdByUser;
     String lastUpdatedByUser;
     String role;
+    String subArea;
 
-    public MemberAllSearchDto(Long memberId, Boolean familyHead, String firstName, String lastName, String fatherName, String gender, Date dateOfBirth, String maritalStatus, String bloodGroup, String education, String permanentAddress, String mobile, String altMobile, String whatsappMobile, String email, String area, String currentAddress, String profession, String professionAddress, String professionEmail, String professionNumber, String aborigine, String status, Date createDateTime, Date lastUpdatedDateTime, String createdByUser, String lastUpdatedByUser, String role) {
+    public MemberAllSearchDto(Long memberId, Boolean familyHead, String firstName, String lastName, String fatherName, String gender, Date dateOfBirth, String maritalStatus, String bloodGroup, String education, String permanentAddress, String mobile, String altMobile, String whatsappMobile, String email, String area, String currentAddress, String profession, String professionAddress, String professionEmail, String professionNumber, String aborigine, String status, Date createDateTime, Date lastUpdatedDateTime, String createdByUser, String lastUpdatedByUser, String role, String subArea) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -62,6 +63,7 @@ public class MemberAllSearchDto {
         this.createdByUser = createdByUser;
         this.lastUpdatedByUser = lastUpdatedByUser;
         this.role = role;
+        this.area = subArea;
     }
 
     public Long getMemberId() {
@@ -286,5 +288,13 @@ public class MemberAllSearchDto {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSubArea() {
+        return subArea;
+    }
+
+    public void setSubArea(String subArea) {
+        this.subArea = subArea;
     }
 }

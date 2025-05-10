@@ -81,6 +81,13 @@ public class FamilyService {
 
             memberDetails.setFamily(family);
             memberRepository.save(memberDetails);
+
+            // Format the unique ID only if it's not already set
+            if (memberDetails.getUniqueMemberId() == null) {
+                String formattedId = String.format("SJS%07d", memberDetails.getMemberId());
+                memberDetails.setUniqueMemberId(formattedId);
+                memberDetails = memberRepository.save(memberDetails); // Save again to update the uniqueMemberId
+            }
         }
         return memberDetails;
     }
@@ -241,11 +248,11 @@ public class FamilyService {
             byte[] photo = member.length > 17 && member[17] instanceof byte[]
                     ? (byte[]) member[17]
                     : new byte[0];
-
+            String subArea = member.length > 18 ? (String) member[18]: "";
 
             return new MemberDefaultDto(memberId, familyHead, firstName, lastName, dateOfBirth, bloodGroup, mobile,
                 whatsappMobile, area, status, role, dhowanPani, fatherName, profession,
-                    sthanak, interest, garamPani, photo);
+                    sthanak, interest, garamPani, photo, subArea);
         }).collect(Collectors.toList());
         //return members;
     }
@@ -307,12 +314,13 @@ public class FamilyService {
                                                   String professionEmail,
                                                   String professionNumber,
                                                   String status,
+                                                  String subArea,
                                                   Boolean familyHead) {
 
         return memberRepository.searchMembers(firstName, lastName, fatherName, gender, dateOfBirth,
                 maritalStatus, bloodGroup, education, permanentAddress, mobile, altMobile,
                 whatsappMobile, email, area, currentAddress, profession, professionAddress,
-                professionEmail, professionNumber, status, familyHead);
+                professionEmail, professionNumber, status, subArea, familyHead);
     }
 
     // Get prediction for member data using Hugging Face model
@@ -329,5 +337,19 @@ public class FamilyService {
         }else {
             return "Member not found";
         }
+    }
+
+    public void assignUniqueIdsToExistingMembers() {
+        List<Member> members = memberRepository.findAll();
+
+        for (Member member : members) {
+            if (member.getUniqueMemberId() == null) {
+                String formattedId = String.format("SJS%07d", member.getMemberId());
+                member.setUniqueMemberId(formattedId);
+                memberRepository.save(member);
+        }
+        }
+
+        System.out.println("✅ Unique IDs assigned to existing members.");
     }
 }

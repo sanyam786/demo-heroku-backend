@@ -29,6 +29,7 @@ public class MemberDefaultDto {
     String availability;
     String monthlyHours;
     String garamPani;
+    String subArea;
     @Lob
     @Column(name = "photo", columnDefinition = "MEDIUMBLOB")
     private byte[] photo;
@@ -37,7 +38,7 @@ public class MemberDefaultDto {
                             Date dateOfBirth, String bloodGroup, String mobile, String whatsappMobile,
                             String area, String status, String role, String dhowanPani,
                             String fatherName, String profession, String[] sthanak,
-                            String[] interest, String garamPani, byte[] photo) {
+                            String[] interest, String garamPani, byte[] photo, String subArea) {
         this.memberId = memberId;
         this.familyHead = familyHead;
         this.firstName = firstName;
@@ -56,6 +57,7 @@ public class MemberDefaultDto {
         this.interest = interest;
         this.garamPani = garamPani;
         this.photo = photo;
+        this.area = subArea;
     }
 
     public Long getMemberId() {
@@ -232,6 +234,18 @@ public class MemberDefaultDto {
 
     public void setGaramPani(String garamPani) {
         this.garamPani = garamPani;
+    }
+
+    public void setProfession(String profession) {
+        this.profession = profession;
+    }
+
+    public String getSubArea() {
+        return subArea;
+    }
+
+    public void setSubArea(String subArea) {
+        this.subArea = subArea;
     }
 
     //    public Family getFamily() {

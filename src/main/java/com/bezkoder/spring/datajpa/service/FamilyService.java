@@ -71,6 +71,8 @@ public class FamilyService {
             if(memberDetails.getSameAddAsFamilyHeadAddCheck()){
                 for (Member member: family.getMembers()){
                     if(member.getFamilyHead()){
+                        memberDetails.setArea(member.getArea());
+                        memberDetails.setSubArea(member.getSubArea());
                         memberDetails.setCurrentAddress(member.getCurrentAddress());
                         memberDetails.setPermanentAddress(member.getPermanentAddress());
                         break;
@@ -148,6 +150,8 @@ public class FamilyService {
             }else if(member.getSameAddAsFamilyHeadAddCheck() != null && member.getSameAddAsFamilyHeadAddCheck()){
                 for (Member familyHead: family.getMembers()){
                     if(familyHead.getFamilyHead()){
+                        member.setArea(familyHead.getArea());
+                        member.setSubArea(familyHead.getSubArea());
                         member.setCurrentAddress(familyHead.getCurrentAddress());
                         member.setPermanentAddress(familyHead.getPermanentAddress());
                         break;

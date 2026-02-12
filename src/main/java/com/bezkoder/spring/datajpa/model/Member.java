@@ -51,6 +51,7 @@ public class Member {
     String monthlyHours;
     Boolean sameAddAsFamilyHeadAddCheck;
     String garamPani;
+    Boolean nri;
     @Column
     private Double latitude;
     @Column
@@ -442,5 +443,13 @@ public class Member {
 
     public void setSubArea(String subArea) {
         this.subArea = subArea;
+    }
+
+    public Boolean getNRI() {
+        return nri;
+    }
+
+    public void setNRI(Boolean NRI) {
+        nri = NRI;
     }
 }

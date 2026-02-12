@@ -142,6 +142,8 @@ public class FamilyService {
                 for (Member familyMemeber: family.getMembers()){
                     if(!familyMemeber.getFamilyHead() &&
                             familyMemeber.getSameAddAsFamilyHeadAddCheck() != null && familyMemeber.getSameAddAsFamilyHeadAddCheck()){
+                        familyMemeber.setArea(member.getArea());
+                        familyMemeber.setSubArea(member.getSubArea());
                         familyMemeber.setCurrentAddress(member.getCurrentAddress());
                         familyMemeber.setPermanentAddress(member.getPermanentAddress());
                         memberRepository.save(familyMemeber);
